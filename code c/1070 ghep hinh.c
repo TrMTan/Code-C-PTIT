@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<math.h>
+
+long long dthv(long long n)
+{
+	long long y = sqrt(n);
+	if(y * y == n){
+		return y;
+	}
+	return 0;
+}
+
+long long swap(long long *a, long long *b){
+	int c = *a;
+	*a = *b;
+	*b = c;
+}
+
+int main(){
+	long long a, b, c, d, e, f;
+	scanf("%lld %lld %lld %lld %lld %lld", &a, &b, &c, &d, &e, &f);
+	long long tongdt = a * b + c * d + e * f;
+	if(dthv(tongdt) == 0){
+		printf("NO");
+		return 0;
+	}else{
+		long long y = dthv(tongdt);
+		if(a > b){
+			swap(&a, &b);
+		}
+		if(c > d){
+			swap(&c, &d);
+		}
+		if(e > f){
+			swap(&e, &f);
+		}
+		if(b == d && d == f && f == y){
+			printf("YES");
+		}
+		else{
+			if(d == y){
+				swap(&d, &b);
+				swap(&c, &a);
+			}
+			if(f == y){
+				swap(&f, &b);
+				swap(&e, &a);
+			}
+			if(b == y){
+				a = y - a;
+				if(c == a && e == a || c == a && f == a || d == a && e == a || d == a && f == a){
+					printf("YES");
+				}else{
+					printf("NO");
+				}
+			}
+			else{
+				printf("NO");
+			}
+		}
+	}
+}
